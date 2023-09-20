@@ -1,5 +1,7 @@
-import { BelongsTo, Column, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, HasOne, Model, Table } from 'sequelize-typescript';
 import { Type } from '../type/type.model';
+import { Right } from '../rights/right.model';
+import { UserTeam } from 'src/user-team/user-team.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -41,7 +43,8 @@ export class User extends Model {
   cotisation: boolean;
 
   @Column
-  rights: string;
+  @BelongsTo(() => Right)
+  rights: Right;
 
   @Column
   equipement: string;
@@ -49,8 +52,8 @@ export class User extends Model {
   @Column({ defaultValue: false })
   isActive: boolean;
 
-  @Column
-  team: string;
+  @HasOne(() => UserTeam, 'userId')
+  team: UserTeam;
 
   @Column({ defaultValue: false })
   isDeleted: boolean;
