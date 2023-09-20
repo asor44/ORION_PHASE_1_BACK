@@ -1,4 +1,4 @@
-import { BelongsTo, Column, HasOne, Model, Table } from 'sequelize-typescript';
+import { Column, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 import { Type } from '../type/type.model';
 import { Right } from '../rights/right.model';
 import { UserTeam } from 'src/user-team/user-team.model';
@@ -30,7 +30,9 @@ export class User extends Model {
   postalCode: number;
 
   @Column
-  @BelongsTo(() => Type)
+  typeId: number;
+
+  @HasOne(() => Type, 'userId')
   type: Type;
 
   @Column
@@ -42,9 +44,8 @@ export class User extends Model {
   @Column({ defaultValue: false })
   cotisation: boolean;
 
-  @Column
-  @BelongsTo(() => Right)
-  rights: Right;
+  @HasMany(() => Right, 'userId')
+  rights: Right[];
 
   @Column
   equipement: string;
