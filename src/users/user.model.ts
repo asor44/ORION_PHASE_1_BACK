@@ -1,4 +1,5 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, Model, Table } from 'sequelize-typescript';
+import { Type } from '../type/type.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -27,7 +28,8 @@ export class User extends Model {
   postalCode: number;
 
   @Column
-  type: string;
+  @BelongsTo(() => Type)
+  type: Type;
 
   @Column
   army: string;
