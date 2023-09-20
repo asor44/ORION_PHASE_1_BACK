@@ -15,11 +15,41 @@ export class User extends Model {
   email: string;
 
   @Column
+  phone: string;
+
+  @Column
   password: string;
 
+  @Column
+  city: string;
+
+  @Column
+  postalCode: number;
+
+  @Column
+  type: string;
+
+  @Column
+  army: string;
+
+  @Column
+  rank: string;
+
   @Column({ defaultValue: false })
-  isAdmin: boolean;
+  cotisation: boolean;
+
+  @Column
+  rights: string;
+
+  @Column
+  equipement: string;
 
   @Column({ defaultValue: false })
   isActive: boolean;
+
+  @Column
+  team: string;
+
+  @Column({ defaultValue: false })
+  isDeleted: boolean;
 }
