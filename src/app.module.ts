@@ -5,7 +5,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import 'dotenv/config';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.model';
-import { Type } from './type/type.model';
+import { Type } from './types/type.model';
 import { Article } from './articles/article.model';
 import { UserArticle } from './user-article/user-article.model';
 import { Team } from './team/team.model';
