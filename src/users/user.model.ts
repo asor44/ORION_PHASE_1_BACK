@@ -27,10 +27,7 @@ export class User extends Model {
   city: string;
 
   @Column
-  postalCode: number;
-
-  @Column
-  typeId: number;
+  postalCode: string;
 
   @HasOne(() => Type, 'userId')
   type: Type;
