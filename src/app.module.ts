@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app/app.controller';
 import { AppService } from './app/app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { DbDevConfig } from './database/config';
 import 'dotenv/config';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.model';
@@ -11,7 +12,6 @@ import { UserArticle } from './user-article/user-article.model';
 import { Team } from './team/team.model';
 import { UserTeam } from './user-team/user-team.model';
 import { Right } from './rights/right.model';
-import { DbDevConfig } from './database/config';
 
 @Module({
   imports: [
