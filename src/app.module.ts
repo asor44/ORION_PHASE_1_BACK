@@ -11,19 +11,14 @@ import { UserArticle } from './user-article/user-article.model';
 import { Team } from './team/team.model';
 import { UserTeam } from './user-team/user-team.model';
 import { Right } from './rights/right.model';
+import { DbDevConfig } from './database/config';
 
 @Module({
   imports: [
     SequelizeModule.forRoot({
+      ...DbDevConfig,
       dialect: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      models: [User, Article, UserArticle, Team, UserTeam, Right, Type],
-      autoLoadModels: true,
-      synchronize: true,
+      models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
     }),
     UsersModule,
   ],
