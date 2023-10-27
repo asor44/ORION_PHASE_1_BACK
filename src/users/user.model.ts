@@ -29,6 +29,9 @@ export class User extends Model {
   @Column
   postalCode: string;
 
+  @Column
+  Type: string;
+
   @HasOne(() => Type, 'userId')
   type: Type;
 
@@ -41,11 +44,14 @@ export class User extends Model {
   @Column({ defaultValue: false })
   cotisation: boolean;
 
+  @Column
+  Rights: string;
+
   @HasMany(() => Right, 'userId')
   rights: Right[];
 
   @Column
-  equipement: string;
+  equipment: string;
 
   @Column({ defaultValue: false })
   isActive: boolean;

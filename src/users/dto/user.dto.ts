@@ -19,7 +19,7 @@ export class UserDto {
   rank: string;
   cotisation: boolean;
   rights: string;
-  equipement: string;
+  equipment: string;
   isActive: boolean;
   team: string;
   isDeleted: boolean;

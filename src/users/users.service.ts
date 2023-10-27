@@ -64,6 +64,13 @@ export class UsersService {
             HttpStatus.BAD_REQUEST,
           );
         }
+        const existingUser = await this.findOneByEmail(userDto.email);
+        if (existingUser) {
+          throw new HttpException(
+            'Email already exists',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
       }
       if (
         userDto.phone === undefined ||
@@ -75,14 +82,6 @@ export class UsersService {
         if (!phoneRegex.test(userDto.phone)) {
           throw new HttpException(
             'Phone number must be a valid French phone number',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-      } else if (userDto.email) {
-        const existingUser = await this.findOneByEmail(userDto.email);
-        if (existingUser) {
-          throw new HttpException(
-            'Email already exists',
             HttpStatus.BAD_REQUEST,
           );
         }
