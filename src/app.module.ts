@@ -22,7 +22,6 @@ const DbDevConfig = config.development;
       ...DbDevConfig,
       dialect: 'postgres',
       models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
-      autoLoadModels: true,
       synchronize: true,
     }),
     UsersModule,

@@ -1,37 +1,27 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { UserDto } from 'src/users/dto/user.dto';
 import { User } from 'src/users/user.model';
-import { UsersService } from 'src/users/users.service';
 
 export class AuthService {
   constructor(
     @InjectModel(User)
-    private usersService: UsersService,
+    private userModel: typeof User,
   ) {}
 
-  async login(userDto): Promise<User> {
-    return await this.usersService.findOneByEmail(userDto.email);
-  }
+  // async login(userDto): Promise<User> {
+  //   return await this.usersService.findOneByEmail(userDto.email);
+  // }
 
-  async register(userDto): Promise<User> {
+  async register(userDto: UserDto): Promise<User> {
     try {
       if (
-        userDto.firstName === undefined ||
-        userDto.firstName === null ||
-        userDto.firstName === ''
+        userDto.identifiant === undefined ||
+        userDto.identifiant === null ||
+        userDto.identifiant === ''
       ) {
         throw new HttpException(
-          'First name is required',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      if (
-        userDto.lastName === undefined ||
-        userDto.lastName === null ||
-        userDto.lastName === ''
-      ) {
-        throw new HttpException(
-          'Last name is required',
+          'Identifiant is required',
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -47,7 +37,9 @@ export class AuthService {
           throw new HttpException('Email is not valid', HttpStatus.BAD_REQUEST);
         }
       }
-      return await this.usersService.create(userDto);
+      return await this.userModel.create({
+        ...userDto,
+      });
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
