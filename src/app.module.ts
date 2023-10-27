@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app/app.controller';
 import { AppService } from './app/app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { DbDevConfig } from './database/config';
 import 'dotenv/config';
+import * as config from './database/config.json';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.model';
 import { Type } from './types/type.model';
@@ -14,12 +14,16 @@ import { UserTeam } from './user-team/user-team.model';
 import { Right } from './rights/right.model';
 import { AuthModule } from './auth/auth.module';
 
+const DbDevConfig = config.development;
+
 @Module({
   imports: [
     SequelizeModule.forRoot({
       ...DbDevConfig,
       dialect: 'postgres',
       models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
+      autoLoadModels: true,
+      synchronize: true,
     }),
     UsersModule,
     AuthModule,
