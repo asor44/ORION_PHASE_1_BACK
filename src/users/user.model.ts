@@ -2,11 +2,15 @@ import { Column, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 import { Type } from '../types/type.model';
 import { Right } from '../rights/right.model';
 import { UserTeam } from 'src/user-team/user-team.model';
+import { Col } from 'sequelize/types/utils';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
   @Column({ primaryKey: true, autoIncrement: true })
   id: number;
+
+  @Column
+  identifiant: string;
 
   @Column
   firstName: string;

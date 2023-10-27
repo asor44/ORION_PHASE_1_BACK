@@ -2,15 +2,15 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class UserDto {
   id: number;
-  @IsNotEmpty()
+  //@IsNotEmpty()
   firstName: string;
-  @IsNotEmpty()
+  //@IsNotEmpty()
   lastName: string;
   @IsEmail()
   email: string;
-  @IsNotEmpty()
+  //@IsNotEmpty()
   phone: string;
-  @IsNotEmpty()
+  //@IsNotEmpty()
   password: string;
   city: string;
   postalCode: string;
@@ -23,4 +23,6 @@ export class UserDto {
   isActive: boolean;
   team: string;
   isDeleted: boolean;
+
+  identifiant: string;
 }
