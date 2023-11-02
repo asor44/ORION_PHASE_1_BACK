@@ -23,6 +23,7 @@ const DbDevConfig = config.development;
       dialect: 'postgres',
       models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
       synchronize: true,
+      autoLoadModels: true,
     }),
     UsersModule,
     AuthModule,
