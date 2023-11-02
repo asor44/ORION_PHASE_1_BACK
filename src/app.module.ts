@@ -13,6 +13,7 @@ import { Team } from './team/team.model';
 import { UserTeam } from './user-team/user-team.model';
 import { Right } from './rights/right.model';
 import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
 
 const DbDevConfig = config.development;
 
@@ -27,6 +28,7 @@ const DbDevConfig = config.development;
     }),
     UsersModule,
     AuthModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
