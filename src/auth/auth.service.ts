@@ -2,11 +2,14 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { UserDto } from 'src/users/dto/user.dto';
 import { User } from 'src/users/user.model';
+import * as bcrypt from 'bcrypt';
+import { UsersService } from 'src/users/users.service';
 
 export class AuthService {
   constructor(
     @InjectModel(User)
     private userModel: typeof User,
+    private usersService: UsersService,
   ) {}
 
   // async login(userDto): Promise<User> {
@@ -37,6 +40,15 @@ export class AuthService {
           throw new HttpException('Email is not valid', HttpStatus.BAD_REQUEST);
         }
       }
+      const existingUser = await this.usersService.findOneByEmail(
+        userDto.email,
+      );
+      if (existingUser) {
+        throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
+      }
+      // const saltRounds = 10;
+      // const salt = bcrypt.genSaltSync(saltRounds);
+      // const hash = await bcrypt.hash(userDto.password, salt);
       return await this.userModel.create({
         ...userDto,
       });

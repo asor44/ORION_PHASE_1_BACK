@@ -133,7 +133,6 @@ export class UsersService {
   //     const saltRounds = 10;
   //     const salt = bcrypt.genSaltSync(saltRounds);
   //     const hash = await bcrypt.hash(userDto.password, salt);
-  //     console.log(userDto.password, hash);
   //     return await this.userModel.create({
   //       firstName: userDto.firstName,
   //       lastName: userDto.lastName,
