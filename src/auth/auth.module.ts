@@ -6,10 +6,11 @@ import { UsersService } from 'src/users/users.service';
 import { Sequelize } from 'sequelize';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from 'src/users/user.model';
+import { MailService } from 'src/mail/mail.service';
 
 @Module({
   imports: [SequelizeModule.forFeature([User])],
-  providers: [AuthService, UsersService],
+  providers: [AuthService, UsersService, MailService],
   controllers: [AuthController],
   exports: [SequelizeModule],
 })

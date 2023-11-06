@@ -11,4 +11,9 @@ export class AuthController {
   async register(@Body() userDto: UserDto): Promise<User> {
     return await this.authService.register(userDto);
   }
+
+  @Post('setNewPassword')
+  async setNewPassword(@Body() userDto: UserDto): Promise<User> {
+    return await this.authService.setNewPassword(userDto);
+  }
 }

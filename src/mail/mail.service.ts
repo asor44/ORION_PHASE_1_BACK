@@ -7,12 +7,12 @@ import transporter from './mail.config'; // Importez votre configuration de tran
 export class MailService {
   private transporter = transporter; // Utilisez votre configuration de transporter
 
-  async sendEmail(to: string, subject: string, text: string) {
+  async sendEmail(to: string) {
     const mailOptions = {
-      from: 'votre-email@gmail.com',
+      from: 'social@asor44.fr',
       to,
-      subject,
-      text,
+      subject: 'Test',
+      text: 'Test',
     };
 
     try {
