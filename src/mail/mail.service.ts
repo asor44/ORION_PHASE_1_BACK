@@ -1,17 +1,23 @@
 // email.service.ts
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
-import transporter from './mail.config'; // Importez votre configuration de transporter
+import transporter from './mail.config';
 
 @Injectable()
 export class MailService {
-  private transporter = transporter; // Utilisez votre configuration de transporter
+  // use the transporter from the mail.config.ts file
+  private transporter = transporter;
 
-  async sendEmail(to: string) {
+  async sendEmail(to: string, name: string) {
     const mailOptions = {
       from: 'social@asor44.fr',
       to,
       subject: 'Test',
+      template: './templates/confirmation.hbs',
+      contexte: {
+        name: name,
+        url: 'http://localhost:3000/auth/confirm',
+      },
       text: 'Test',
     };
 
