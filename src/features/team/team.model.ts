@@ -1,5 +1,5 @@
 import { Column, HasMany, Model, Table } from 'sequelize-typescript';
-import { UserTeam } from 'src/user-team/user-team.model';
+import { UserTeam } from 'src/features/user-team/user-team.model';
 
 @Table({ tableName: 'team' })
 export class Team extends Model {

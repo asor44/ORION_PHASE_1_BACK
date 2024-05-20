@@ -1,9 +1,6 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
-import { UserDto } from './dto/user.dto';
-import { typeDto } from 'src/types/type.dto';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {

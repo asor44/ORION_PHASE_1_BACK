@@ -1,7 +1,7 @@
 import { Column, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
 import { Type } from '../types/type.model';
 import { Right } from '../rights/right.model';
-import { UserTeam } from 'src/user-team/user-team.model';
+import { UserTeam } from 'src/features/user-team/user-team.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {

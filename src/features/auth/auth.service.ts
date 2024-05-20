@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { UserDto } from 'src/users/dto/user.dto';
-import { User } from 'src/users/user.model';
+import { UserDto } from 'src/features/users/dto/user.dto';
+import { User } from 'src/features/users/user.model';
 import * as bcrypt from 'bcrypt';
-import { UsersService } from 'src/users/users.service';
-import { MailService } from 'src/mail/mail.service';
+import { UsersService } from 'src/features/users/users.service';
+import { MailService } from 'src/features/mail/mail.service';
 
 export class AuthService {
   constructor(
