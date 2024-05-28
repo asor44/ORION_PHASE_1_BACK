@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/features/users/dto/user.dto';
 import { User } from 'src/features/users/user.model';
@@ -20,5 +20,10 @@ export class AuthController {
   @Get('microsoft')
   async microsoftLogin() {
     return await this.authService.microsoftLogin();
+  }
+
+  @Get('redirect')
+  async redirect(@Param() code: string) {
+    return await this.authService.microsoftRedirect(code);
   }
 }
