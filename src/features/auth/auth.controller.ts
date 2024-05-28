@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/features/users/dto/user.dto';
 import { User } from 'src/features/users/user.model';
@@ -15,5 +15,10 @@ export class AuthController {
   @Post('setNewPassword')
   async setNewPassword(@Body() userDto: UserDto): Promise<User> {
     return await this.authService.setNewPassword(userDto);
+  }
+
+  @Get('microsoft')
+  async microsoftLogin() {
+    return await this.authService.microsoftLogin();
   }
 }

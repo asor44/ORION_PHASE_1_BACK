@@ -5,6 +5,8 @@ import { User } from 'src/features/users/user.model';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from 'src/features/users/users.service';
 import { MailService } from 'src/features/mail/mail.service';
+import { HttpService } from '@nestjs/axios';
+import { AxiosResponse } from 'axios';
 
 export class AuthService {
   constructor(
@@ -12,6 +14,7 @@ export class AuthService {
     private userModel: typeof User,
     private usersService: UsersService,
     private mailService: MailService,
+    private readonly httpService: HttpService,
   ) {}
 
   // async login(userDto): Promise<User> {
@@ -80,6 +83,18 @@ export class AuthService {
       });
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async microsoftLogin(): Promise<AxiosResponse> {
+    try {
+      const response = await this.httpService.axiosRef.get(
+        'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   }
 }
