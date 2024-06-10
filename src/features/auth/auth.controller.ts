@@ -17,12 +17,12 @@ export class AuthController {
     return await this.authService.setNewPassword(userDto);
   }
 
-  @Get('microsoft')
+  @Post('microsoft')
   async microsoftLogin() {
     return await this.authService.microsoftLogin();
   }
 
-  @Get('redirect')
+  @Post('redirect')
   async redirect(@Param() code: string) {
     return await this.authService.microsoftRedirect(code);
   }

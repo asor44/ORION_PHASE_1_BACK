@@ -8,6 +8,7 @@ import { MailService } from 'src/features/mail/mail.service';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import 'dotenv/config';
+import { Observable } from 'rxjs';
 
 export class AuthService {
   constructor(
@@ -106,23 +107,28 @@ export class AuthService {
     }
   }
 
-  async microsoftRedirect(code: string): Promise<AxiosResponse> {
+  async microsoftRedirect(
+    code: string,
+  ): Promise<Observable<AxiosResponse<any, any>>> {
     const clientId = process.env.CLIENT_ID;
-    const clientSecret = process.env.CLIENT_SECRET;
-    const scopes = process.env.SCOPES;
     const redirectUri = process.env.REDIRECT_URI;
+    const baseUri = process.env.REDIRECT_BASE_URL;
     try {
       const response = await this.httpService.axiosRef.post(
-        `https://login.microsoftonline.com/consumers/oauth2/v2.0/token`,
+        baseUri,
         {
-          client_id: clientId,
-          scope: scopes,
-          code: code,
-          redirect_uri: redirectUri,
           grant_type: 'authorization_code',
-          client_secret: clientSecret,
+          code: code,
+          client_id: clientId,
+          redirect_uri: redirectUri,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
         },
       );
+      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
