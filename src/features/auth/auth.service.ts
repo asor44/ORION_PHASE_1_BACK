@@ -9,6 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import 'dotenv/config';
 import { Observable } from 'rxjs';
+import { RedirectQuery } from './interface';
 
 export class AuthService {
   constructor(
@@ -108,7 +109,7 @@ export class AuthService {
   }
 
   async microsoftRedirect(
-    code: string,
+    code: RedirectQuery,
   ): Promise<Observable<AxiosResponse<any, any>>> {
     const clientId = process.env.CLIENT_ID;
     const redirectUri = process.env.REDIRECT_URI;
