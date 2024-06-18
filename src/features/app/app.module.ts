@@ -14,6 +14,7 @@ import { UserTeam } from 'src/features/user-team/user-team.model';
 import { Right } from 'src/features/rights/right.model';
 import { AuthModule } from 'src/features/auth/auth.module';
 import { MailModule } from 'src/features/mail/mail.module';
+import { ArticleModule } from '../articles/article.module';
 
 const DbDevConfig = config.development;
 
@@ -29,6 +30,7 @@ const DbDevConfig = config.development;
     UsersModule,
     AuthModule,
     MailModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -116,7 +116,7 @@ export class AuthService {
     const baseUri = process.env.REDIRECT_BASE_URL;
     try {
       const response = await this.httpService.axiosRef.post(
-        baseUri,
+        `https://login.microsoftonline.com/consumers/oauth2/v2.0/token`,
         {
           grant_type: 'authorization_code',
           code: code,
