@@ -1,28 +1,19 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class UserDto {
   id: number;
   @IsNotEmpty()
-  //firstName: string;
-  //@IsNotEmpty()
-  //lastName: string;
-  //@IsEmail()
+  @IsString()
+  firstName: string;
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
+  @IsEmail()
+  @IsNotEmpty()
   email: string;
   //@IsNotEmpty()
   //phone: string;
-  //@IsNotEmpty()
+  @IsNotEmpty()
+  @IsString()
   password: string;
-  //city: string;
-  //postalCode: string;
-  // type: string;
-  // army: string;
-  // rank: string;
-  //cotisation: boolean;
-  // rights: string;
-  // equipment: string;
-  //isActive: boolean;
-  //team: string;
-  //isDeleted: boolean;
-
-  identifiant: string;
 }

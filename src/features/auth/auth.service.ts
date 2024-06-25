@@ -49,40 +49,20 @@ export class AuthService {
 
   async register(userDto: UserDto): Promise<User> {
     try {
-      if (
-        userDto.identifiant === undefined ||
-        userDto.identifiant === null ||
-        userDto.identifiant === ''
-      ) {
-        throw new HttpException(
-          'Identifiant is required',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-      if (
-        userDto.email === undefined ||
-        userDto.email === null ||
-        userDto.email === ''
-      ) {
-        throw new HttpException('Email is required', HttpStatus.BAD_REQUEST);
-      } else if (userDto.email) {
-        const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-        if (!emailRegex.test(userDto.email)) {
-          throw new HttpException('Email is not valid', HttpStatus.BAD_REQUEST);
-        }
-      }
       const existingUser = await this.usersService.findOneByEmail(
         userDto.email,
       );
       if (existingUser) {
         throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
       }
-      // const saltRounds = 10;
-      // const salt = bcrypt.genSaltSync(saltRounds);
-      // const hash = await bcrypt.hash(userDto.password, salt);
-      this.mailService.sendEmail(userDto.email, userDto.identifiant);
+      const saltRounds = 10;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hash = await bcrypt.hashSync(userDto.password, salt);
       return await this.userModel.create({
-        ...userDto,
+        firstname: userDto.firstName,
+        lastname: userDto.lastName,
+        email: userDto.email,
+        password: hash,
       });
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);

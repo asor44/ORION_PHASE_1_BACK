@@ -1,7 +1,4 @@
-import { Column, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
-import { Type } from '../types/type.model';
-import { Right } from '../rights/right.model';
-import { UserTeam } from 'src/features/user-team/user-team.model';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -9,19 +6,13 @@ export class User extends Model {
   id: number;
 
   @Column
-  identifiant: string;
+  firstname: string;
 
-  // @Column
-  // firstName: string;
-
-  // @Column
-  // lastName: string;
+  @Column
+  lastname: string;
 
   @Column
   email: string;
-
-  // @Column
-  // phone: string;
 
   @Column
   password: string;
