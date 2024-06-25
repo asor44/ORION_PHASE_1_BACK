@@ -3,14 +3,24 @@ import { AuthService } from './auth.service';
 import { UserDto } from 'src/features/users/dto/user.dto';
 import { User } from 'src/features/users/user.model';
 import { RedirectQuery } from './interface';
+import { UserLoginDto } from '../users/dto/user-login.dto';
+import { Public } from '../../core/decorator/public.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Public()
   @Post('register')
   async register(@Body() userDto: UserDto): Promise<User> {
     return await this.authService.register(userDto);
+  }
+  @Public()
+  @Post('login')
+  async login(
+    @Body() userLoginDto: UserLoginDto,
+  ): Promise<{ access_token: string }> {
+    return await this.authService.login(userLoginDto);
   }
 
   @Post('setNewPassword')

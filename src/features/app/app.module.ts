@@ -15,7 +15,7 @@ import { Right } from 'src/features/rights/right.model';
 import { AuthModule } from 'src/features/auth/auth.module';
 import { MailModule } from 'src/features/mail/mail.module';
 import { ArticleModule } from '../articles/article.module';
-
+import { AuthGuard } from 'src/features/auth/auth.guard';
 const DbDevConfig = config.development;
 
 @Module({
@@ -33,6 +33,12 @@ const DbDevConfig = config.development;
     ArticleModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: 'APP_GUARD',
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
