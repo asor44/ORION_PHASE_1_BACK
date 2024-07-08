@@ -16,13 +16,23 @@ import { AuthModule } from 'src/features/auth/auth.module';
 import { MailModule } from 'src/features/mail/mail.module';
 import { ArticleModule } from '../articles/article.module';
 import { AuthGuard } from 'src/features/auth/auth.guard';
-const DbDevConfig = config.development;
+import { Dialect } from 'sequelize';
 
 @Module({
   imports: [
     SequelizeModule.forRoot({
-      ...DbDevConfig,
-      dialect: 'postgres',
+      dialect: process.env.DEV_DB_DIALECT as Dialect,
+      host: process.env.DEV_DB_HOST,
+      port: parseInt(process.env.DEV_DB_PORT),
+      username: process.env.DEV_DB_USER,
+      password: process.env.DEV_DB_PASSWORD,
+      database: process.env.DEV_DB_NAME,
+      dialectOptions: {
+        ssl: {
+          require: true, // This will help you. But you will see nwe error
+          rejectUnauthorized: false, // This line will fix new error
+        },
+      },
       models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
       synchronize: true,
       autoLoadModels: true,
