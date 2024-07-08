@@ -2,14 +2,19 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersService } from 'src/features/users/users.service';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from 'src/features/users/user.model';
 import { MailService } from 'src/features/mail/mail.service';
+import { JwtModule } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
-
+import { UsersModule } from '../users/users.module';
+import { jwtConstants } from './constants';
 @Module({
   imports: [
-    SequelizeModule.forFeature([User]),
+    UsersModule,
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '2d' },
+    }),
     HttpModule.registerAsync({
       useFactory: () => ({
         timeout: 5000,
@@ -19,6 +24,5 @@ import { HttpModule } from '@nestjs/axios';
   ],
   providers: [AuthService, UsersService, MailService],
   controllers: [AuthController],
-  exports: [SequelizeModule],
 })
 export class AuthModule {}
