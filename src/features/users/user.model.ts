@@ -1,4 +1,12 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  HasOne,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Right } from '../rights/right.model';
+import { UserRight } from '../users-rights/users-rights.model';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -17,41 +25,50 @@ export class User extends Model {
   @Column
   password: string;
 
-  // @Column
-  // city: string;
+  @Column
+  birthdate: Date;
 
-  // @Column
-  // postalCode: string;
+  @Column
+  city: string;
 
-  // @Column
-  // Type: string;
+  @Column
+  address: string;
 
-  // @HasOne(() => Type, 'userId')
-  // type: Type;
+  @Column
+  phonenumber: number;
 
-  // @Column
-  // army: string;
+  @Column
+  postalCode: string;
 
-  // @Column
-  // rank: string;
+  @Column
+  country: string;
 
-  // @Column({ defaultValue: false })
-  // cotisation: boolean;
+  @Column
+  army: string;
 
-  // @Column
-  // Rights: string;
+  @Column
+  reserve: boolean;
 
-  // @HasMany(() => Right, 'userId')
-  // rights: Right[];
+  @Column
+  nid: number;
 
-  // @Column
-  // equipment: string;
+  @Column
+  grade: string;
+
+  @Column
+  poste: string;
+
+  @Column({ defaultValue: false })
+  cotisation: boolean;
+
+  @Column({ defaultValue: false })
+  member: boolean;
+
+  @BelongsToMany(() => Right, () => UserRight)
+  right: Right;
 
   // @Column({ defaultValue: false })
   // isActive: boolean;
-
-  // @HasOne(() => UserTeam, 'userId')
-  // team: UserTeam;
 
   // @Column({ defaultValue: false })
   // isDeleted: boolean;
