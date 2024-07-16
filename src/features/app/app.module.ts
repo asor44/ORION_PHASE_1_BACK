@@ -17,6 +17,7 @@ import { MailModule } from 'src/features/mail/mail.module';
 import { ArticleModule } from '../articles/article.module';
 import { AuthGuard } from 'src/features/auth/auth.guard';
 import { Dialect } from 'sequelize';
+import { UserRight } from '../users-rights/users-rights.model';
 
 @Module({
   imports: [
@@ -33,7 +34,16 @@ import { Dialect } from 'sequelize';
           rejectUnauthorized: false, // This line will fix new error
         },
       },
-      models: [User, Type, Article, UserArticle, Team, UserTeam, Right],
+      models: [
+        User,
+        Type,
+        Article,
+        UserArticle,
+        Team,
+        UserTeam,
+        Right,
+        UserRight,
+      ],
       synchronize: true,
       autoLoadModels: true,
     }),
