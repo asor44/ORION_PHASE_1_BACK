@@ -7,6 +7,7 @@ import {
 } from 'sequelize-typescript';
 import { Right } from '../rights/right.model';
 import { UserRight } from '../users-rights/users-rights.model';
+import { Col } from 'sequelize/types/utils';
 
 @Table({ tableName: 'users' })
 export class User extends Model {
@@ -72,4 +73,9 @@ export class User extends Model {
 
   // @Column({ defaultValue: false })
   // isDeleted: boolean;
+  @Column
+  calendar: string;
+
+  @Column
+  equipment: string;
 }
