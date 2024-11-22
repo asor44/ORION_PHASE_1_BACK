@@ -11,7 +11,7 @@ export class UsersController {
     return await this.usersService.findAll();
   }
 
-  @Get()
+  @Get('/user')
   async findOne(@Request() req): Promise<User> {
     return await this.usersService.findOne(req.user.sub);
   }
