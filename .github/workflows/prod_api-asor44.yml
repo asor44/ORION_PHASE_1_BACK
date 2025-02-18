@@ -6,7 +6,7 @@ name: Build and deploy Node.js project to Azure Function App - api-asor44
 on:
   push:
     branches:
-      - PROD
+      - DEV
   workflow_dispatch:
 
 env:
